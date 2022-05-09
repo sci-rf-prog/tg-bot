@@ -1,15 +1,27 @@
+import os
 import telebot
-import conf 
+import json
 from telebot import types
+from dotenv import dotenv_values
+
+CURR_PATH = os.path.dirname(__file__)
+with open(os.path.join(CURR_PATH, '../static/links.json')) as json_file:
+    links = json.load(json_file)
+
+env = dotenv_values(os.path.join(CURR_PATH, '../.env'))
+client = telebot.TeleBot(env['TOKEN'])
 
 
-client = telebot.TeleBot(conf.config['token'])
+def main():
+	client.polling()
+
 
 @client.message_handler(commands = ['get_start','start'])
 def inlinebutton(message):
 	client.send_message(message.chat.id, "инфа о НС")
-	client.send_photo(message.chat.id, 'https://vk.com/feed?section=likes&z=photo-157823267_457278575%2Fdef88df5f2c4808795')
+	client.send_photo(message.chat.id, links['logo'])
 	button(message)
+
 
 def button(message):
 	markup_inline = types.InlineKeyboardMarkup()
@@ -35,4 +47,8 @@ def answerbutton(call):
 @client.message_handler(content_types=["text"])
 def get_mess(message):
 	pass
-client.polling()
+
+
+if __name__ == "__main__":
+	main()
+

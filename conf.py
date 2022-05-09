@@ -1,1 +1,0 @@
-config = {'name': 'test', 'token': '5167546995:AAGA2SpIIyjDwztM0nsrct1R0NhLpBtF9yc'}
