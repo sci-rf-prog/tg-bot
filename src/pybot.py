@@ -11,6 +11,9 @@ with open(os.path.join(CURR_PATH, '../static/links.json')) as json_file:
 env = dotenv_values(os.path.join(CURR_PATH, '../.env'))
 client = telebot.TeleBot(env['TOKEN'])
 
+with open(os.path.join(CURR_PATH, '../static/prog.txt'), 'r') as txt_file:
+	prog_info = txt_file.read()
+
 
 def main():
 	client.polling()
@@ -36,9 +39,9 @@ def button(message):
 @client.callback_query_handler(func = lambda call: True)
 def answerbutton(call):
 	if call.data == 'prog':
-		client.send_message(call.message.chat.id, 'Инфа о направелении прог')
+		client.send_message(call.message.chat.id, prog_info)
 	if call.data == 'robot':
-		client.send_message(call.message.chat.id, 'Инфа о направелении роботы')
+		client.send_message(call.message.chat.id, 'Инфа о направелении роботов')
 	if call.data == 'inf':
 		client.send_message(call.message.chat.id, 'Инфа о направелении просветительское')
 	client.answer_callback_query(callback_query_id=call.id)
