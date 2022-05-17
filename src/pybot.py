@@ -26,6 +26,12 @@ def inlinebutton(message):
 	button(message)
 
 
+@client.message_handler(content_types = ['new_chat_members'])
+def inlinebutton(message):
+	client.send_message(message.chat.id, "инфа о НС")
+	client.send_photo(message.chat.id, links['logo'])
+	button(message)
+
 def button(message):
 	markup_inline = types.InlineKeyboardMarkup()
 	item_prog = types.InlineKeyboardButton(text = "проги", callback_data = 'prog')
