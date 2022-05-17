@@ -36,7 +36,8 @@ def hello(message):
 @client.message_handler(content_types=['text'])
 def start(message):
 	if(message.text == 'Старт'):
-		client.send_message(message.chat.id, "инфа о НС")
+		rem = types.ReplyKeyboardRemove()
+		client.send_message(message.chat.id, "инфа о НС", reply_markup = rem)
 		client.send_photo(message.chat.id, links['logo'])
 		button(message)
 
