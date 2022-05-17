@@ -19,11 +19,11 @@ def main():
 	client.polling()
 
 
-@client.message_handler(commands = ['get_start','start'])
+'''@client.message_handler(commands = ['get_start','start'])
 def inlinebutton(message):
 	client.send_message(message.chat.id, "инфа о НС")
 	client.send_photo(message.chat.id, links['logo'])
-	button(message)
+	button(message)'''
 
 
 @client.message_handler(content_types = ['new_chat_members'])
