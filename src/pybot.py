@@ -19,18 +19,16 @@ def main():
 	client.polling()
 
 
-'''@client.message_handler(commands = ['get_start','start'])
-def inlinebutton(message):
-	client.send_message(message.chat.id, "инфа о НС")
-	client.send_photo(message.chat.id, links['logo'])
-	button(message)'''
-
-
-@client.message_handler(content_types = ['new_chat_members'])
+@client.message_handler(commands = ['get_start','start'])
 def inlinebutton(message):
 	client.send_message(message.chat.id, "инфа о НС")
 	client.send_photo(message.chat.id, links['logo'])
 	button(message)
+
+
+@client.message_handler(content_types = ['new_chat_members'])
+def hello(message):
+	client.send_message(message.chat.id, text=f"Рад приветствовать, {user}! {config.txt}\nДля начала - используй /start")
 
 def button(message):
 	markup_inline = types.InlineKeyboardMarkup()
