@@ -36,6 +36,26 @@ def inlinebutton(message):
 	button(message)
 
 
+@client.message_handler(content_types = ['new_chat_members'])
+def hello(message):
+	markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+    	btn = types.KeyboardButton('Старт')
+    	markup.add(btn)
+	client.send_message(message.chat.id, text=f"Рад приветствовать, {message.from_user.first_name}!", reply_markup = markup)
+
+@client.message_handler(content_types=['text'])
+def start(message):
+	if(message.text == 'Старт'):
+		rem = types.ReplyKeyboardRemove()
+		client.send_message(message.chat.id, "инфа о НС", reply_markup = rem)
+		client.send_photo(message.chat.id, links['logo'])
+		button(message)
+
+	
+@bot.message_handler(content_types=['new_chat_members'])
+def greeting(message):
+	bot.reply_to(message, text='hello')	
+
 def button(message):
 	markup_inline = types.InlineKeyboardMarkup()
 	item_prog = types.InlineKeyboardButton(text = "Программирование", callback_data = 'prog')
