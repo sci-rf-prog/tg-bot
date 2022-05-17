@@ -20,19 +20,19 @@ with open(os.path.join(CURR_PATH, '../static/rob.txt'), 'r') as txt_file:
 with open(os.path.join(CURR_PATH, '../static/scipo.txt'), 'r') as txt_file:
 	scipo_info = txt_file.read()
 with open(os.path.join(CURR_PATH, '../static/inf.txt'), 'r') as txt_file:
-	sinf_info = txt_file.read()
+	inf_info = txt_file.read()
 
 
 def main():
 	client.polling()
 
-@bot.message_handler(content_types=['new_chat_members'])
+@client.message_handler(content_types=['new_chat_members'])
 def greeting(message):
-	bot.reply_to(message, text='Привет')
+	client.reply_to(message, text='Привет')
 
 @client.message_handler(commands = ['get_start','start'])
 def inlinebutton(message):
-	client.send_photo(message.chat.id, links['logo'],caption = inf)
+	client.send_photo(message.chat.id, links['logo'],caption = inf_info)
 	button(message)
 
 
@@ -40,10 +40,10 @@ def button(message):
 	markup_inline = types.InlineKeyboardMarkup()
 	item_prog = types.InlineKeyboardButton(text = "Программирование", callback_data = 'prog')
 	item_robot = types.InlineKeyboardButton(text = "Робототехника", callback_data = 'robot')
-	item_inf = types.InlineKeyboardButton(text = "Развлекательный", callback_data = 'razv')
+	item_razvl = types.InlineKeyboardButton(text = "Развлекательное", callback_data = 'razv')
 	item_inf = types.InlineKeyboardButton(text = "Научно-популярное", callback_data = 'scipo')
 
-	markup_inline.add(item_prog,item_robot,item_inf)
+	markup_inline.add(item_prog, item_robot, item_razvl, item_inf)
 	client.send_message(message.chat.id, "Выберите направление о котором хотели бы узнать больше", reply_markup = markup_inline)
 
 
