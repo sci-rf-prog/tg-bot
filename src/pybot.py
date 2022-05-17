@@ -28,7 +28,7 @@ def main():
 
 @bot.message_handler(content_types=['new_chat_members'])
 def greeting(message):
-bot.reply_to(message, text='Привет')
+	bot.reply_to(message, text='Привет')
 
 @client.message_handler(commands = ['get_start','start'])
 def inlinebutton(message):
