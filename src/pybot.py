@@ -44,7 +44,7 @@ def start(message):
 	
 @bot.message_handler(content_types=['new_chat_members'])
 def greeting(message):
-bot.reply_to(message, text='hello')	
+	bot.reply_to(message, text='hello')	
 
 def button(message):
 	markup_inline = types.InlineKeyboardMarkup()
