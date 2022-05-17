@@ -36,7 +36,7 @@ def hello(message):
 @client.message_handler(content_types=['text'])
 def start(message):
 	if(message.text == 'Старт'):
-		client.edit_message_text("инфа о НС", message.chat.id, message.message.id, reply_markup = None)
+		
 		client.send_photo(message.chat.id, links['logo'])
 		button(message)
 
