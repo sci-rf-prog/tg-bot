@@ -28,7 +28,22 @@ def inlinebutton(message):
 
 @client.message_handler(content_types = ['new_chat_members'])
 def hello(message):
-	client.send_message(message.chat.id, text=f"Рад приветствовать, {message.from_user.first_name}!")
+	markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+    	btn = types.KeyboardButton('Старт')
+    	markup.add(btn)
+	client.send_message(message.chat.id, text=f"Рад приветствовать, {message.from_user.first_name}!", reply_markup = markup)
+
+@client.message_handler(content_types=['text'])
+def start(message):
+	if(message.text == 'Старт'):
+		client.edit_message_text("инфа о НС", message.chat.id, message.message.id, reply_markup = None)
+		client.send_photo(message.chat.id, links['logo'])
+		button(message)
+
+	
+@bot.message_handler(content_types=['new_chat_members'])
+def greeting(message):
+bot.reply_to(message, text='hello')	
 
 def button(message):
 	markup_inline = types.InlineKeyboardMarkup()
