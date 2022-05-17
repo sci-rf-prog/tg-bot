@@ -28,7 +28,7 @@ def inlinebutton(message):
 
 @client.message_handler(content_types = ['new_chat_members'])
 def hello(message):
-	client.send_message(message.chat.id, text=f"Рад приветствовать, {message.from_user.first_name}! {config.txt}\nДля начала - используй /start")
+	client.send_message(message.chat.id, text=f"Рад приветствовать, {message.from_user.first_name}!")
 
 def button(message):
 	markup_inline = types.InlineKeyboardMarkup()
