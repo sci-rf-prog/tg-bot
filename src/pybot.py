@@ -26,9 +26,14 @@ with open(os.path.join(CURR_PATH, '../static/inf.txt'), 'r') as txt_file:
 def main():
 	client.polling()
 
-@client.message_handler(content_types=['new_chat_members'])
-def greeting(message):
-	client.reply_to(message, text='Привет')
+
+@client.message_handler(content_types = ['new_chat_members'])
+def hello(message):
+	markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+	btn = types.KeyboardButton('Узнать о НС!')
+	markup.add(btn)
+	client.send_message(message.chat.id, text=f"Рад приветствовать, {message.from_user.first_name}! Жми Кнопку!", reply_markup = markup)
+
 
 @client.message_handler(commands = ['get_start','start'])
 def inlinebutton(message):
@@ -36,29 +41,17 @@ def inlinebutton(message):
 	button(message)
 
 
-@client.message_handler(content_types = ['new_chat_members'])
-def hello(message):
-	markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-    	btn = types.KeyboardButton('Старт')
-    	markup.add(btn)
-	client.send_message(message.chat.id, text=f"Рад приветствовать, {message.from_user.first_name}!", reply_markup = markup)
-
 @client.message_handler(content_types=['text'])
 def start(message):
-	if(message.text == 'Старт'):
+	if(message.text == 'Узнать о НС!'):
 		rem = types.ReplyKeyboardRemove()
-		client.send_message(message.chat.id, "инфа о НС", reply_markup = rem)
-		client.send_photo(message.chat.id, links['logo'])
+		client.send_photo(message.chat.id, links['logo'],caption = inf_info)
 		button(message)
 
-	
-@bot.message_handler(content_types=['new_chat_members'])
-def greeting(message):
-	bot.reply_to(message, text='hello')	
 
 def button(message):
 	markup_inline = types.InlineKeyboardMarkup()
-	item_prog = types.InlineKeyboardButton(text = "Программирование", callback_data = 'prog')
+	item_prog = types.InlineKeyboardButton(text = "Прога", callback_data = 'prog')
 	item_robot = types.InlineKeyboardButton(text = "Робототехника", callback_data = 'robot')
 	item_razvl = types.InlineKeyboardButton(text = "Развлекательное", callback_data = 'razv')
 	item_inf = types.InlineKeyboardButton(text = "Научно-популярное", callback_data = 'scipo')
@@ -74,7 +67,7 @@ def answerbutton(call):
 	if call.data == 'robot':
 		client.send_message(call.message.chat.id, robot_info)
 	if call.data == 'razv':
-		client.send_message(call.message.chat.id, inf_info)
+		client.send_message(call.message.chat.id, razv_info)
 	if call.data == 'scipo':
 		client.send_message(call.message.chat.id, scipo_info)
 	client.answer_callback_query(callback_query_id=call.id)
