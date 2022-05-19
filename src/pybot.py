@@ -3,6 +3,7 @@ import telebot
 import json
 from telebot import types
 from dotenv import dotenv_values
+from static import prog_info, razv_info, robot_info, scipo_info, inf_info
 
 CURR_PATH = os.path.dirname(__file__)
 with open(os.path.join(CURR_PATH, '../static/links.json')) as json_file:
@@ -10,17 +11,6 @@ with open(os.path.join(CURR_PATH, '../static/links.json')) as json_file:
 
 env = dotenv_values(os.path.join(CURR_PATH, '../.env'))
 client = telebot.TeleBot(env['TOKEN'])
-
-with open(os.path.join(CURR_PATH, '../static/prog.txt'), 'r') as txt_file:
-	prog_info = txt_file.read()
-with open(os.path.join(CURR_PATH, '../static/razv.txt'), 'r') as txt_file:
-	razv_info = txt_file.read()
-with open(os.path.join(CURR_PATH, '../static/rob.txt'), 'r') as txt_file:
-	robot_info = txt_file.read()
-with open(os.path.join(CURR_PATH, '../static/scipo.txt'), 'r') as txt_file:
-	scipo_info = txt_file.read()
-with open(os.path.join(CURR_PATH, '../static/inf.txt'), 'r') as txt_file:
-	inf_info = txt_file.read()
 
 
 def main():
